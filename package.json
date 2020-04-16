@@ -1,0 +1,24 @@
+{
+  "name": "stock-alarm",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon ./src/app.ts --exec ts-node --watch ./src",
+    "build": "babel src --out-dir ./dist"
+  },
+  "devDependencies": {
+    "@types/node": "^13.11.1",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "prettier": "^2.0.4"
+  },
+  "dependencies": {
+    "@types/js-yaml": "^3.12.3",
+    "axios": "^0.19.2",
+    "path": "^0.12.7",
+    "ts-node": "^8.8.2",
+    "typescript": "^3.8.3"
+  }
+}
