@@ -15,7 +15,7 @@ export default class DartDisclosureToSlack extends AbstractSlackMessageSender {
     getReqeustParams(message: AlarmMessage): any {
         const params: any = {
             token: this.token,
-            channel: this.channel,
+            channel: this.channel.id,
             text: `[공시 업데이트]: 회사=${message.corpName}, 보고서명=${message.title}`,
         };
         return params;
