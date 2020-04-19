@@ -68,6 +68,8 @@ export class StockAlarmFactory {
                 this.beanBundles.push(dartDisclosureBundle);
             }
 
+
+            console.log('StockAlarmFactory Init Finish.');
         } catch {
 
         }

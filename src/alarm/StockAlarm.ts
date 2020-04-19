@@ -5,6 +5,7 @@ import MessageSender from "./sender/MessageSender";
 import util from "util";
 import fs from "fs";
 import delay from "delay";
+import schedule from 'node-schedule';
 
 const readFile = util.promisify(fs.readFile);
 
@@ -28,18 +29,42 @@ export default class StockAlarm {
 
 	static async execute(cron: string) {
 
-		console.log('Job start');
+		// 개발
+		// console.log('Job start');
+		//
+		// const dataSource = await this.dataSourceFrom.fetch();
+		// const alarmMessages = this.processor.process(dataSource);
+		//
+		// console.log(`Total ${alarmMessages.length} alarm messages are found.`);
+		//
+		// for (const alarmMessage of alarmMessages) {
+		// 	this.senders.forEach(sender => sender.send(alarmMessage));
+		// 	await delay(3000);
+		// }
+		//
+		// console.log('Job finish');
 
-		const dataSource = await this.dataSourceFrom.fetch();
-		const alarmMessages = this.processor.process(dataSource);
+		// 운영
 
-		console.log(`Total ${alarmMessages.length} alarm messages are found.`);
+		console.log(`Stock Alarm is started with key [${process.env.APP_KEY}].`);
 
-		for (const alarmMessage of alarmMessages) {
-			this.senders.forEach(sender => sender.send(alarmMessage));
-			await delay(3000);
-		}
+		schedule.scheduleJob(cron, async () => {
+			console.log('Job start');
 
-		console.log('Job finish');
+			const dataSource = await this.dataSourceFrom.fetch();
+			const alarmMessages = this.processor.process(dataSource);
+
+			console.log(`Total ${alarmMessages.length} alarm messages are found.`);
+
+			for (const alarmMessage of alarmMessages) {
+				this.senders.forEach(sender => sender.send(alarmMessage));
+				await delay(3000);
+			}
+
+			console.log('Job finish');
+		});
+
+
+
 	}
 }
