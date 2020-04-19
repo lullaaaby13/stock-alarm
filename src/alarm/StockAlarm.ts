@@ -13,13 +13,12 @@ interface StockAlarmDependencies {
 }
 
 export default class StockAlarm {
+
 	_self: StockAlarm = new StockAlarm();
 
 	private static dataSourceFrom: DataSourceFrom;
 	private static processor: Processor;
 	private static senders: MessageSender[];
-
-	private constructor() { }
 
 	static async init({ dataSourceFrom, processor, senders }: BeanBundle) {
 		this.dataSourceFrom = dataSourceFrom;

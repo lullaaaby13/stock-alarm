@@ -7,6 +7,7 @@ export default interface DataSourceFrom {
 }
 
 export interface API {
+    name: string;
     method: string;
     url: string;
 }
