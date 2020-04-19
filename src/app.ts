@@ -1,25 +1,28 @@
+'use strict';
+
+// @ts-ignore
 import path from 'path';
 import yaml from 'js-yaml';
 import fs from 'fs';
-import StockAlarm from './alarm/StockAlarm';
-import {System} from "typescript";
+import {StockAlarmFactory} from "./alarm/StockAlarmFactory";
+import StockAlarm from "./alarm/StockAlarm";
 
 (async () => {
-	await loadConfiguration();
+	try {
+		// const { APP_KEY } = process.env;
+		const APP_KEY: string = 'DART-DISCLOSURE';
 
+		await StockAlarmFactory.init();
 
+		const configuration = StockAlarmFactory.getConfiguration();
+		const { crons } = configuration;
+		const cron = crons[APP_KEY];
 
+		const bundles = StockAlarmFactory.getInstance(APP_KEY);
+		StockAlarm.init(bundles);
+		StockAlarm.execute(cron);
+	} catch (e) {
+		console.error(e);
+	}
 })();
 
-
-
-async function loadConfiguration() {
-	try {
-		const configPath = path.resolve(__dirname, '..', 'resources', 'application.yaml');
-		const configFile = fs.readFileSync(configPath, 'utf8');
-		process.env = yaml.safeLoad(configFile);
-	} catch (e) {
-		// @ts-ignore
-		System.exit(1);
-	}
-}

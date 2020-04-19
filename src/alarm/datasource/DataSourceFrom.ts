@@ -3,6 +3,10 @@
  */
 
 export default interface DataSourceFrom {
-    fetch(): any;
+    fetch(): Promise<any>;
 }
 
+export interface API {
+    method: string;
+    url: string;
+}

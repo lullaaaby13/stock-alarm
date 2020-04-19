@@ -1,2 +1,19 @@
-test: 'Hello World'
-apple: 'Apple'
+dartApi:
+  apiKey: "c3612ac797677127e1e6deacaf24a602599a9d5c"
+  searchDisclosure:
+    method: "get"
+    url: "https://opendart.fss.or.kr/api/list.json"
+
+crons:
+  DART-DISCLOSURE: "*/10 * * * * *"
+
+kakaoApi:
+  apiKey: "kakaoKey"
+
+filterKeywords:
+  - "Apple"
+  - "Banana"
+  - "주식"
+
+
+

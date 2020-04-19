@@ -1,21 +1,35 @@
-import axios from 'axios';
 import AbstractDataSourceFrom from '../AbstractDataSourceFrom';
+import axios from 'axios';
+import {API} from "../DataSourceFrom";
+import URL from 'url';
 
-export default class DataSourceFromAPI extends AbstractDataSourceFrom {
+
+export class DataSourceFromAPI extends AbstractDataSourceFrom {
+	apiKey: string;
+	method: string;
 	url: string;
 
-	constructor(url: string) {
+	constructor(apiKey:string, api: API) {
 		super();
-		this.url = url;
-
-
+		this.apiKey = apiKey;
+		this.method = api.method;
+		this.url = api.url;
 	}
 
 	async fetch(): Promise<any> {
-		return 1;
+		if (this.method.toLowerCase() === 'get') {
+			return axios.get(this.url, {
+				params: {
+					crtfc_key: this.apiKey,
+					bgn_de: '20200417',
+					end_de: '20200417',
+					page_count: 8,
+				}
+			});
+		} else if (this.method.toLowerCase() === 'post') {
+			return axios.post(this.url);
+		}
 	}
 
-	async testCall(): Promise<void> {
-	    await axios.get(this.url);
-    }
+
 }
