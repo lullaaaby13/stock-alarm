@@ -28,26 +28,18 @@ export default class StockAlarm {
 
 	static async execute(cron: string) {
 
+		console.log('Job start');
+
 		const dataSource = await this.dataSourceFrom.fetch();
 		const alarmMessages = this.processor.process(dataSource);
 
-		console.log(alarmMessages);
+		console.log(`Alarm Messages: ${alarmMessages}`);
 
 		for (const alarmMessage of alarmMessages) {
 			this.senders.forEach(sender => sender.send(alarmMessage));
 			await delay(3000);
 		}
 
-		// const message:AlarmMessage = {
-		// 	corpName: "",
-		// 	createdAt: new Date(),
-		// 	filterKeyword: undefined,
-		// 	id: "",
-		// 	origin: undefined,
-		// 	sendAlarm: "",
-		// 	title: ""
-		//
-		// };
-		// this.senders[0].send(message);
+		console.log('Job finish');
 	}
 }
