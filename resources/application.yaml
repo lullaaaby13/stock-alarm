@@ -11,16 +11,14 @@ kakaoApi:
   apiKey: "kakaoKey"
 
 slackApi:
-  botToken: "xoxb-1077989743508-1084451024129-XQU4eorTiWjEIHRmTyszDYvM"
+  botToken: "xoxb-1077989743508-1084451024129-uf3BWd24H6XD1hDI8S9GJZUF"
   postMessage:
     method: "post"
     url: "https://slack.com/api/chat.postMessage"
     channel: "C0123Q5A5MG"
 
 filterKeywords:
-  - "Apple"
-  - "Banana"
-  - "주식"
-
+  - "단일판매"
+  - "시장"
 
 

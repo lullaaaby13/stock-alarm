@@ -2,13 +2,9 @@ import DataSourceFrom from "./datasource/DataSourceFrom";
 import {BeanBundle} from "./StockAlarmFactory";
 import Processor from "./processor/Processor";
 import MessageSender from "./sender/MessageSender";
-import path from "path";
-import yaml from "js-yaml";
 import util from "util";
 import fs from "fs";
-import schedule from 'node-schedule';
-import moment from "moment";
-import {AlarmMessage} from "./model/AlarmMessage";
+import delay from "delay";
 
 const readFile = util.promisify(fs.readFile);
 
@@ -33,24 +29,26 @@ export default class StockAlarm {
 
 	static async execute(cron: string) {
 
-		// const dataSource = await this.dataSourceFrom.fetch();
-		// const alarmMessages = this.processor.process(dataSource);
+		const dataSource = await this.dataSourceFrom.fetch();
+		const alarmMessages = this.processor.process(dataSource);
+
+		console.log(alarmMessages);
+
+		for (const alarmMessage of alarmMessages) {
+			this.senders.forEach(sender => sender.send(alarmMessage));
+			await delay(3000);
+		}
+
+		// const message:AlarmMessage = {
+		// 	corpName: "",
+		// 	createdAt: new Date(),
+		// 	filterKeyword: undefined,
+		// 	id: "",
+		// 	origin: undefined,
+		// 	sendAlarm: "",
+		// 	title: ""
 		//
-		// alarmMessages.forEach(alarmMessage => {
-		// 	this.senders.forEach(sender => sender.send(alarmMessage));
-		// });
-
-
-		const message:AlarmMessage = {
-			corpName: "",
-			createdAt: new Date(),
-			filterKeyword: undefined,
-			id: "",
-			origin: undefined,
-			sendAlarm: "",
-			title: ""
-
-		};
-		this.senders[0].send(message);
+		// };
+		// this.senders[0].send(message);
 	}
 }

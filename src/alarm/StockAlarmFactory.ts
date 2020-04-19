@@ -7,7 +7,7 @@ import path from "path";
 import yaml from "js-yaml";
 import util from "util";
 import fs from "fs";
-import TestMessageSender from "./sender/impl/TestMessageSender";
+import SlackMessageSender from "./sender/impl/SlackMessageSender";
 
 const readFile = util.promisify(fs.readFile);
 
@@ -53,7 +53,7 @@ export class StockAlarmFactory {
                 key: "DART-DISCLOSURE",
                 dataSourceFrom: new DataSourceFromAPI(apiKey, searchDisclosure),
                 processor: new APIDataProcessor(filterKeywords),
-                senders: [new TestMessageSender(botToken, postMessage, postMessage.channel)]
+                senders: [new SlackMessageSender(botToken, postMessage, postMessage.channel)]
             };
 
             this.beanBundles.push(dartDisclosureBundle);
