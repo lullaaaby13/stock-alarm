@@ -18,5 +18,6 @@ export default class DartDisclosureToSlack extends AbstractSlackMessageSender {
             channel: this.channel,
             text: `[공시 업데이트]: 회사=${message.corpName}, 보고서명=${message.title}`,
         };
+        return params;
     }
 }

@@ -21,15 +21,15 @@ export interface BeanBundle {
 
 export class StockAlarmFactory {
     _self: StockAlarmFactory = new StockAlarmFactory();
-    private static beanBundles: BeanBundle[] = []
+    private static beanBundles: BeanBundle[] = [];
     private static configuration: any;
 
     private constructor() {}
 
     static getInstance(appKey: string): any{
-        const bundle = this.beanBundles.find(bundle => bundle.key === appKey);
-        if (bundle) {
-            return bundle
+        const beanBundle = this.beanBundles.find(bundle => bundle.key === appKey);
+        if (beanBundle) {
+            return beanBundle;
         } else {
             throw new Error(`해당 Bundle을 찾을 수 없습니다. [${appKey}]`);
         }
