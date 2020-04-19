@@ -8,6 +8,7 @@ import util from "util";
 import fs from "fs";
 import schedule from 'node-schedule';
 import moment from "moment";
+import {AlarmMessage} from "./model/AlarmMessage";
 
 const readFile = util.promisify(fs.readFile);
 
@@ -32,13 +33,24 @@ export default class StockAlarm {
 
 	static async execute(cron: string) {
 
-		const dataSource = await this.dataSourceFrom.fetch();
-		const alarmMessages = this.processor.process(dataSource);
+		// const dataSource = await this.dataSourceFrom.fetch();
+		// const alarmMessages = this.processor.process(dataSource);
+		//
+		// alarmMessages.forEach(alarmMessage => {
+		// 	this.senders.forEach(sender => sender.send(alarmMessage));
+		// });
 
-		// console.log(alarmMessages);
 
-		alarmMessages.forEach(alarmMessage => {
-			this.senders.forEach(sender => sender.send(alarmMessage));
-		});
+		const message:AlarmMessage = {
+			corpName: "",
+			createdAt: new Date(),
+			filterKeyword: undefined,
+			id: "",
+			origin: undefined,
+			sendAlarm: "",
+			title: ""
+
+		};
+		this.senders[0].send(message);
 	}
 }

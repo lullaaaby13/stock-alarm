@@ -34,6 +34,7 @@ export default class APIDataProcessor implements Processor {
 			const alarmMessage: AlarmMessage = {
 				id: moment().format('YYYYMMDDHHmmssSSS'),
 				sendAlarm: 'Y',
+
 				corpName: report.corp_name,
 				filterKeyword: containsAny(report.report_nm, this.filterKeywords),
 				title: report.report_nm,

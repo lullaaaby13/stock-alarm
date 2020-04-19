@@ -45,14 +45,15 @@ export class StockAlarmFactory {
             const configuration = yaml.safeLoad(configFile);
             this.configuration = configuration;
 
-            const { dartApi, filterKeywords } = configuration;
+            const { slackApi, dartApi, filterKeywords } = configuration;
             const { apiKey, searchDisclosure } = dartApi;
+            const { botToken, postMessage } = slackApi;
 
             const dartDisclosureBundle: BeanBundle = {
                 key: "DART-DISCLOSURE",
                 dataSourceFrom: new DataSourceFromAPI(apiKey, searchDisclosure),
                 processor: new APIDataProcessor(filterKeywords),
-                senders: [new TestMessageSender()]
+                senders: [new TestMessageSender(botToken, postMessage, postMessage.channel)]
             };
 
             this.beanBundles.push(dartDisclosureBundle);

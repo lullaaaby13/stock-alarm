@@ -10,6 +10,13 @@ crons:
 kakaoApi:
   apiKey: "kakaoKey"
 
+slackApi:
+  botToken: "xoxb-1077989743508-1084451024129-XQU4eorTiWjEIHRmTyszDYvM"
+  postMessage:
+    method: "post"
+    url: "https://slack.com/api/chat.postMessage"
+    channel: "C0123Q5A5MG"
+
 filterKeywords:
   - "Apple"
   - "Banana"
