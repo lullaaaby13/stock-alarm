@@ -6,6 +6,7 @@ module.exports = {
     autorestart: true,
     watch: false,
     max_memory_restart: '256M',
+    log_date_format: 'YYYY-MM-DD HH:mm:ss.SSS',
     env: {
       NODE_ENV: 'development',
       APP_KEY: 'DART-DISCLOSURE',
@@ -13,24 +14,6 @@ module.exports = {
     env_production: {
       NODE_ENV: 'production',
       APP_KEY: 'DART-DISCLOSURE',
-    }
-  }, {
-    name: 'PROCESS2',
-    script: './dist/app.js',
-    args: 'one two',
-    instances: 1,
-    autorestart: true,
-    watch: false,
-    max_memory_restart: '256M',
-    env: {
-      NODE_ENV: 'development',
-      TEST: 'HELLO WORLD',
-      BANANA: 'BANANA',
-    },
-    env_production: {
-      NODE_ENV: 'production',
-      TEST: 'HELLO WORLD',
-      BANANA: 'BANANA',
     }
   }],
 
