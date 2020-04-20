@@ -1,5 +1,5 @@
 import {DataSourceFromAPI} from "./datasource/impl/DataSourceFromAPI";
-import DataSourceFrom, {API} from "./datasource/DataSourceFrom";
+import DataSourceFrom from "./datasource/DataSourceFrom";
 import Processor from "./processor/Processor";
 import MessageSender from "./sender/MessageSender";
 import APIDataProcessor from "./processor/impl/APIDataProcessor";
@@ -7,8 +7,8 @@ import path from "path";
 import yaml from "js-yaml";
 import util from "util";
 import fs from "fs";
-import {SlackChannel} from "./sender/slack/AbstractSlackMessageSender";
-import DartDisclosureToSlack from "./sender/slack/DartDisclosureToSlack";
+import {getAppRootPath} from "../utils/CommonUtils";
+import SlackMessageSender, {SlackChannel} from "./sender/slack/SlackMessageSender";
 
 const readFile = util.promisify(fs.readFile);
 
@@ -39,28 +39,27 @@ export class StockAlarmFactory {
 
     static async init() {
         try {
-            const configPath = path.resolve(__dirname, '..', '..', 'resources', 'application.yaml');
+            const appRootPath = getAppRootPath();
+            const configPath = path.resolve(appRootPath, __dirname, '..', '..', 'resources', 'application.yaml');
             const configFile = await readFile(configPath, 'utf8');
             const configuration = yaml.safeLoad(configFile);
             this.configuration = configuration;
 
             const { slack, dartApi, filterKeywords } = configuration;
             const { apiKey, searchDisclosure } = dartApi;
-            const { botToken  } = slack;
-            const apis: API[] = slack.apis;
             const channels: SlackChannel[] = slack.channels;
 
-            const slackPostMessage: API | undefined = apis.find(api => api.name === 'postMessage');
+
             const slackStockAlarmChannel: SlackChannel | undefined = channels.find(channel => channel.name === 'stock-alarm');
 
             // 1. DART-DISCLOSURE
-            if (slackPostMessage !== undefined && slackStockAlarmChannel !== undefined) {
+            if (slackStockAlarmChannel !== undefined) {
                 const dartDisclosureBundle: BeanBundle = {
                     key: "DART-DISCLOSURE",
                     dataSourceFrom: new DataSourceFromAPI(apiKey, searchDisclosure),
                     processor: new APIDataProcessor(filterKeywords),
                     senders: [
-                        new DartDisclosureToSlack(botToken, slackPostMessage, slackStockAlarmChannel)
+                        new SlackMessageSender(slackStockAlarmChannel)
                     ]
                 };
                 this.beanBundles.push(dartDisclosureBundle);

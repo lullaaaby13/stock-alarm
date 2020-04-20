@@ -30,43 +30,39 @@ export default class StockAlarm {
 	static async execute(cron: string) {
 
 		// 개발
-		// console.log('Job start');
-		//
-		// const dataSource = await this.dataSourceFrom.fetch();
-		// const alarmMessages = this.processor.process(dataSource);
-		//
-		// console.log(`Total ${alarmMessages.length} alarm messages are found.`);
-		//
-		// for (const alarmMessage of alarmMessages) {
-		// 	this.senders.forEach(sender => sender.send(alarmMessage));
-		// 	await delay(3000);
-		// }
-		//
-		// console.log('Job finish');
+		console.log('Job start');
+
+		const dataSource = await this.dataSourceFrom.fetch();
+		const alarmMessages = this.processor.process(dataSource);
+
+		const titles = dataSource.data.list.map((report: any) => report.report_nm);
+
+		console.log(`Total ${alarmMessages.length} alarm messages are found.`);
+
+		alarmMessages.forEach(message => this.senders.forEach(sender => sender.send(message)));
+
+		console.log('Job finish');
 
 		// 운영
 
-		console.log(`Stock Alarm is started with key [${process.env.APP_KEY}].`);
-
-		schedule.scheduleJob(cron, async () => {
-			console.log('Job start');
-
-			const dataSource = await this.dataSourceFrom.fetch();
-			const alarmMessages = this.processor.process(dataSource);
-
-			const titles = dataSource.data.list.map((report: any) => report.report_nm);
-			console.log(titles);
-			console.log(`Total ${alarmMessages.length} alarm messages are found.`);
-
-			for (const alarmMessage of alarmMessages) {
-				this.senders.forEach(sender => sender.send(alarmMessage));
-				await delay(3000);
-			}
-
-			console.log('Job finish');
-		});
-
-
-
+		// console.log(`Stock Alarm is started with key [${process.env.APP_KEY}].`);
+		//
+		// schedule.scheduleJob(cron, async () => {
+		// 	console.log('Job start');
+		//
+		// 	const dataSource = await this.dataSourceFrom.fetch();
+		// 	const alarmMessages = this.processor.process(dataSource);
+		//
+		// 	const titles = dataSource.data.list.map((report: any) => report.report_nm);
+		// 	console.log(titles);
+		// 	console.log(`Total ${alarmMessages.length} alarm messages are found.`);
+		//
+		// 	for (const alarmMessage of alarmMessages) {
+		// 		this.senders.forEach(sender => sender.send(alarmMessage));
+		// 		await delay(3000);
+		// 	}
+		//
+		// 	console.log('Job finish');
+		// });
 	}
 }

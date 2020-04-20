@@ -1,7 +1,7 @@
 import Processor from '../Processor';
-import { containsAny } from '../../util/StringUtil';
-import { AlarmMessage } from '../../model/AlarmMessage';
+import {AlarmMessage} from '../../model/AlarmMessage';
 import moment from 'moment';
+import {containsAny} from "../../../utils/StringUtils";
 
 interface DartReport {
 	corp_code: string;

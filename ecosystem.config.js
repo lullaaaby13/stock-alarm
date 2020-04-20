@@ -15,6 +15,22 @@ module.exports = {
       NODE_ENV: 'production',
       APP_KEY: 'DART-DISCLOSURE',
     }
+  }, {
+    name: 'SLACK-MESSAGE-SENDER',
+    script: './dist/app.js',
+    instances: 1,
+    autorestart: true,
+    watch: false,
+    max_memory_restart: '128M',
+    log_date_format: 'YYYY-MM-DD HH:mm:ss.SSS',
+    env: {
+      NODE_ENV: 'development',
+      BOT_TOKEN: '',
+    },
+    env_production: {
+      NODE_ENV: 'production',
+      BOT_TOKEN: '',
+    }
   }],
 
   deploy : {

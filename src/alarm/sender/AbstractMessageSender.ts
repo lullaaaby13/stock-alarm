@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export default abstract class AbstractMessageSender implements MessageSender{
 
-    abstract send(message: AlarmMessage): void;
+    abstract send(message: AlarmMessage): Promise<void>;
 
     getRequest (url: string, params: any) {
         return axios.get(url, { params });

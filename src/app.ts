@@ -1,17 +1,15 @@
 'use strict';
 
 // @ts-ignore
-import path from 'path';
-import yaml from 'js-yaml';
-import fs from 'fs';
 import {StockAlarmFactory} from "./alarm/StockAlarmFactory";
 import StockAlarm from "./alarm/StockAlarm";
+import sequelize from "./infrastructure/database/sequelize";
 
 (async () => {
 	try {
-		// const { APP_KEY } = process.env;
-		const APP_KEY: string = 'DART-DISCLOSURE';
+		await sequelize.sync({ force: false });
 
+		const APP_KEY = process.env.APP_KEY || '';
 		await StockAlarmFactory.init();
 
 		const configuration = StockAlarmFactory.getConfiguration();
