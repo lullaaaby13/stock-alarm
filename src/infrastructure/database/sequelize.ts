@@ -12,6 +12,8 @@ const configFile = fs.readFileSync(configPath, 'utf8');
 const configuration = yaml.safeLoad(configFile);
 const options = configuration[environment];
 
+console.log('Sequelize Options: ', options);
+
 const sequelize = new Sequelize({
     ...options,
     timezone: 'Etc/GMT-9',

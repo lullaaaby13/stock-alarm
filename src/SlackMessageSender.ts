@@ -6,10 +6,12 @@ import delay from "delay";
 
 const POST_MESSAGE_API = 'https://slack.com/api/chat.postMessage';
 const BOT_TOKEN = process.env.BOT_TOKEN || '';
+const environment = process.env.NODE_ENV || 'development';
 
 (async () => {
-    sequelize.sync({ force: false });
-    schedule.scheduleJob('', sendSlackMessageJob);
+    console.log(`Slack Message Sender is started on [${environment}] environment.`);
+    await sequelize.sync({ force: false });
+    schedule.scheduleJob('0 * * * * *', sendSlackMessageJob);
 })();
 
 async function sendSlackMessageJob () {
