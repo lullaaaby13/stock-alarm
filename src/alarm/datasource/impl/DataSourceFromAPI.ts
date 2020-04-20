@@ -8,7 +8,7 @@ export class DataSourceFromAPI extends AbstractDataSourceFrom {
 	method: string;
 	url: string;
 
-	constructor(apiKey:string, api: API) {
+	constructor(apiKey: string, api: API) {
 		super();
 		this.apiKey = apiKey;
 		this.method = api.method;
@@ -20,13 +20,11 @@ export class DataSourceFromAPI extends AbstractDataSourceFrom {
 			return axios.get(this.url, {
 				params: {
 					crtfc_key: this.apiKey,
-					page_count: 20,
+					page_count: 10,
 				}
 			});
 		} else if (this.method.toLowerCase() === 'post') {
 			return axios.post(this.url);
 		}
 	}
-
-
 }
