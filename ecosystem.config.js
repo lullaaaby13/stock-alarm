@@ -17,11 +17,11 @@ module.exports = {
     }
   }, {
     name: 'SLACK-MESSAGE-SENDER',
-    script: './dist/app.js',
+    script: './dist/SlackMessageSender.js',
     instances: 1,
     autorestart: true,
     watch: false,
-    max_memory_restart: '128M',
+    max_memory_restart: '256M',
     log_date_format: 'YYYY-MM-DD HH:mm:ss.SSS',
     env: {
       NODE_ENV: 'development',

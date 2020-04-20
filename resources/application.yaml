@@ -15,7 +15,6 @@ slack:
     - name: "stock-alarm"
       id: "C0123Q5A5MG"
 
-
 filterKeywords:
   - "단일판매"
 
