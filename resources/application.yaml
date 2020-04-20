@@ -11,12 +11,6 @@ kakaoApi:
   apiKey: "kakaoKey"
 
 slack:
-  botToken: ""
-  apis:
-    - name: "postMessage"
-      method: "post"
-      url: "https://slack.com/api/chat.postMessage"
-
   channels:
     - name: "stock-alarm"
       id: "C0123Q5A5MG"
