@@ -5,7 +5,7 @@ dartApi:
     url: "https://opendart.fss.or.kr/api/list.json"
 
 crons:
-  DART-DISCLOSURE: "0 * 7-19 * * *"
+  DART-DISCLOSURE: "*/10 * * * * *"
 
 kakaoApi:
   apiKey: "kakaoKey"
