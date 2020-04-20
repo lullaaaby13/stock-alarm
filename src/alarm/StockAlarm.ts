@@ -54,7 +54,8 @@ export default class StockAlarm {
 			const dataSource = await this.dataSourceFrom.fetch();
 			const alarmMessages = this.processor.process(dataSource);
 
-			console.log(dataSource.data.list);
+			const titles = dataSource.data.list.map((report: any) => report.report_nm);
+			console.log(titles);
 			console.log(`Total ${alarmMessages.length} alarm messages are found.`);
 
 			for (const alarmMessage of alarmMessages) {

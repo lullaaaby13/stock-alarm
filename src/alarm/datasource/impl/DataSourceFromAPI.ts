@@ -1,7 +1,6 @@
 import AbstractDataSourceFrom from '../AbstractDataSourceFrom';
 import axios from 'axios';
 import {API} from "../DataSourceFrom";
-import URL from 'url';
 
 
 export class DataSourceFromAPI extends AbstractDataSourceFrom {
