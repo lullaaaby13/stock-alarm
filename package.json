@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon ./src/app.ts --exec ts-node --watch ./src",
+    "start": "cross-env APP_KEY=DART-DISCLOSURE nodemon ./src/app.ts --exec ts-node --watch ./src",
     "build": "tsc",
     "prod": "pm2 start ecosystem.config.js --env production"
   },

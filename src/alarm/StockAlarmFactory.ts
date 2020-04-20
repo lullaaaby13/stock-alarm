@@ -24,8 +24,6 @@ export class StockAlarmFactory {
     private static beanBundles: BeanBundle[] = [];
     private static configuration: any;
 
-    private constructor() {}
-
     static getInstance(appKey: string): any{
         const beanBundle = this.beanBundles.find(bundle => bundle.key === appKey);
         if (beanBundle) {

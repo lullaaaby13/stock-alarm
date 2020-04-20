@@ -21,8 +21,7 @@ export class DataSourceFromAPI extends AbstractDataSourceFrom {
 			return axios.get(this.url, {
 				params: {
 					crtfc_key: this.apiKey,
-					bgn_de: '20200417',
-					end_de: '20200417',
+					sort_mth: 'asc',
 					page_count: 8,
 				}
 			});
