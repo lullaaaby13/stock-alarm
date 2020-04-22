@@ -37,7 +37,7 @@ export default class StockAlarm {
 			const alarmMessages = this.processor.process(dataSource);
 
 			const titles = dataSource.data.list.map((report: any) => report.report_nm);
-
+			// console.log(dataSource.data.list);
 			console.log(`Total ${alarmMessages.length} alarm messages are found.`);
 
 			alarmMessages.forEach(message => this.senders.forEach(sender => sender.send(message)));

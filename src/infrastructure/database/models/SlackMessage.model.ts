@@ -1,4 +1,4 @@
-import {AutoIncrement, Column, DataType, Default, Model, PrimaryKey, Table} from 'sequelize-typescript';
+import {AutoIncrement, Column, DataType, Default, Model, PrimaryKey, Table, Unique} from 'sequelize-typescript';
 
 @Table({ timestamps: true, underscored: true })
 export default class SlackMessage extends Model<SlackMessage> {
@@ -14,12 +14,16 @@ export default class SlackMessage extends Model<SlackMessage> {
     @Column
     channelId!: string;
 
+    @Unique
+    @Column
+    messageKey!: string;
+
     @Column
     text!: string;
 
 
     @Column({
-        type: DataType.ENUM("N", "Y"),
+        type: DataType.ENUM("N", "Y", "E"),
         defaultValue: "N"
     })
     isProcessed!: string;

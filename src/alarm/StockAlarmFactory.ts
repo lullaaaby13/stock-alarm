@@ -40,15 +40,16 @@ export class StockAlarmFactory {
     static async init() {
         try {
             const appRootPath = getAppRootPath();
-            const configPath = path.resolve(appRootPath, __dirname, '..', '..', 'resources', 'application.yaml');
+            const configPath = path.resolve(appRootPath, 'resources', 'application.yaml');
             const configFile = await readFile(configPath, 'utf8');
             const configuration = yaml.safeLoad(configFile);
             this.configuration = configuration;
 
+            console.log('Configuration is successfully loaded : ', this.configuration);
+
             const { slack, dartApi, filterKeywords } = configuration;
             const { apiKey, searchDisclosure } = dartApi;
             const channels: SlackChannel[] = slack.channels;
-
 
             const slackStockAlarmChannel: SlackChannel | undefined = channels.find(channel => channel.name === 'stock-alarm');
 
@@ -65,10 +66,9 @@ export class StockAlarmFactory {
                 this.beanBundles.push(dartDisclosureBundle);
             }
 
-
             console.log('StockAlarmFactory Init Finish.');
-        } catch {
-
+        } catch (e){
+            console.error(e);
         }
     }
 }

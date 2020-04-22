@@ -17,7 +17,7 @@ console.log('Sequelize Options: ', options);
 const sequelize = new Sequelize({
     ...options,
     timezone: 'Etc/GMT-9',
-    models: [ __dirname + '/models/**/*.model.ts' ]
+    models: [ __dirname + '/models/**/*.model.ts', __dirname + '/models/**/*.model.js' ]
 });
 
 export default sequelize;
