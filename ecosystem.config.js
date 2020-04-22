@@ -3,8 +3,8 @@ module.exports = {
     name: 'DART-DISCLOSURE',
     script: './dist/app.js',
     instances: 1,
-    autorestart: false,
-    watch: false,
+    autorestart: true,
+    watch: true,
     max_memory_restart: '256M',
     log_date_format: 'YYYY-MM-DD HH:mm:ss.SSS',
     env: {
@@ -19,8 +19,8 @@ module.exports = {
     name: 'SLACK-MESSAGE-SENDER',
     script: './dist/SlackMessageSender.js',
     instances: 1,
-    autorestart: false,
-    watch: false,
+    autorestart: true,
+    watch: true,
     max_memory_restart: '256M',
     log_date_format: 'YYYY-MM-DD HH:mm:ss.SSS',
     env: {

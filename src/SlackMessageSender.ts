@@ -14,7 +14,7 @@ const environment = process.env.NODE_ENV || 'development';
     console.log(`Slack Message Sender is started on [${environment}] environment.`);
     try {
         await sequelize.sync({ force: false });
-        schedule.scheduleJob('0 * * * * *', sendSlackMessageJob);
+        schedule.scheduleJob('*/15 * * * * *', sendSlackMessageJob);
     } catch (e) {
         console.error(e);
     }
@@ -52,7 +52,7 @@ async function sendSlackMessageJob () {
             } catch (e) {
                 console.error(`Slack Message 발송 실패`, e);
             }
-            await delay(3000);
+            await delay(2000);
         }
     } catch (e) {
         console.error(e);
