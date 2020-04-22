@@ -1,7 +1,7 @@
 module.exports = {
   apps : [{
     name: 'DART-DISCLOSURE',
-    script: './dist/src/app.js',
+    script: './dist/app.js',
     instances: 1,
     autorestart: false,
     watch: false,
@@ -17,7 +17,7 @@ module.exports = {
     }
   }, {
     name: 'SLACK-MESSAGE-SENDER',
-    script: './dist/src/SlackMessageSender.js',
+    script: './dist/SlackMessageSender.js',
     instances: 1,
     autorestart: false,
     watch: false,
