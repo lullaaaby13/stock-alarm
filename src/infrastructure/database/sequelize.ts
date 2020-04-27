@@ -11,11 +11,13 @@ const configPath = path.resolve(appRootPath, 'resources', 'application-database.
 const configFile = fs.readFileSync(configPath, 'utf8');
 const configuration = yaml.safeLoad(configFile);
 const options = configuration[environment];
+const logging = environment === 'development' ? true : false;
 
 console.log('Sequelize Options: ', options);
 
 const sequelize = new Sequelize({
     ...options,
+    logging,
     timezone: 'Etc/GMT-9',
     models: [ __dirname + '/models/**/*.model.ts', __dirname + '/models/**/*.model.js' ]
 });

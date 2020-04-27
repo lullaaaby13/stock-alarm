@@ -5,7 +5,7 @@ dartApi:
     url: "https://opendart.fss.or.kr/api/list.json"
 
 crons:
-  DART-DISCLOSURE: "0 * 7-18 * * *"
+  DART-DISCLOSURE: "*/3 * 9-17 * * *"
 
 kakaoApi:
   apiKey: "kakaoKey"
@@ -18,6 +18,8 @@ slack:
 filterKeywords:
   - "단일판매"
   - "투자판단"
+  - "특허권"
+  - "합병"
 
 
 
